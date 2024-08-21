@@ -12,10 +12,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Load models
-face_classifier = cv2.CascadeClassifier('C:/Users/vbdia/Spyder/Emotion detection/haarcascade_frontalface_default.xml')
-emotion_model = load_model('C:/Users/vbdia/Spyder/Emotion detection/emotion_detection_model_100epochs.h5')
-age_model = load_model('C:/Users/vbdia/Spyder/Emotion detection/age_model_50epochs.h5')
-gender_model = load_model('C:/Users/vbdia/Spyder/Emotion detection/gender_model_50epochs.h5')
+face_classifier = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
+emotion_model = load_model('../emotion_detection_model_100epochs.h5')
+age_model = load_model('../age_model_50epochs.h5')
+gender_model = load_model('../gender_model_50epochs.h5')
 
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 gender_labels = ['Male', 'Female']
