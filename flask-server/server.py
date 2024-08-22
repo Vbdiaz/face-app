@@ -9,7 +9,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://client-face-app.vercel.app"}})
 
 # Load models
 face_classifier = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
@@ -37,8 +37,7 @@ def upload_image():
 
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
-        cv2.rectangle(img,(x,y),(x
-                                 +w,y+h),(255,0,0),2)
+        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         roi_gray = gray[y:y + h, x:x + w]
         roi_gray = cv2.resize(roi_gray, (48, 48))
         roi = roi_gray.astype('float') / 255.0

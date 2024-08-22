@@ -1,5 +1,5 @@
 import React from "react";
-import WebcamCapture from './components/WebcamCapture';
+import WebcamCapture from './components/Camera';
 import './App.css'
 import ParticlesComponent from './components/Particles';
 
