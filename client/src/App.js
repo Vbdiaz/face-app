@@ -1,5 +1,5 @@
 import React from "react";
-import Camera from './components/Camera';
+import WebcamCapture from './components/WebcamCapture';
 import './App.css'
 import ParticlesComponent from './components/Particles';
 
@@ -15,7 +15,7 @@ function App() {
           Age, Emotion & Gender Predictor
         </p>
       </header>
-      <Camera />
+      <WebcamCapture />
     </div>
   );
 }
