@@ -46,23 +46,21 @@ function Camera() {
   };
 
   return (
-    <div>
-      <header className="text-center">
-        <h1 className="z-10 text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-black-800 mb-4">
-          Intelligent Predictions
-        </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl font-roboto text-gray-600">
-          Age, Gender & Gender Identity - CNN Powered Insights
-        </p>
-      </header>
-    <div class="flex justify-center h-screen">
-      <div class="relative w-60 h-80 overflow-hidden rounded-lg border-4 border-blue-500">
-        <video id="webcam" ref={videoRef} class="w-full h-full object-cover"></video>
-    </div>
-    </div>
-      
-      <button onClick={startCamera}>Start Camera</button>
-      <button onClick={captureImage}>Capture Image</button>
+    <div class="relative">
+      <div class="flex justify-center h-screen">
+        <div class="w-60 h-80 overflow-hidden rounded-lg border-4 border-blue-500">
+          <video
+            id="webcam"
+            ref={videoRef}
+            class="w-full h-full object-cover"
+          ></video>
+        </div>
+      </div>
+
+      <button onClick={startCamera} class='text-white'>
+        Start Camera
+      </button>
+      <button class='text-white' onClick={captureImage}>Capture Image</button>
       {processedImgSrc && (
         <div>
           <h2>Processed Image:</h2>
