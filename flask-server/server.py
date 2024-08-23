@@ -9,7 +9,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://client-face-app.vercel.app/"}})
+CORS(app, resources={r"/*": {"origins": "https://client-face-app.vercel.app"}})
 
 # Load models
 face_classifier = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
@@ -19,6 +19,10 @@ gender_model = load_model('../gender_model_50epochs.h5')
 
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 gender_labels = ['Male', 'Female']
+
+@app.route("/", methods=["GET"])
+def home():
+    return "This is the backend and it's working!"
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload_image():
