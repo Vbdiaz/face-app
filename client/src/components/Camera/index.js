@@ -7,6 +7,8 @@ const Camera = () => {
   const [responseImg, setResponseImg] = useState(null);
 
   const videoConstraints = {
+    width: 1920, // Increase width
+    height: 1080, // Increase height
     facingMode: "user", // Use selfie camera or front camera
   };
 
@@ -18,7 +20,7 @@ const Camera = () => {
 
   const sendImage = async (imageSrc) => {
     try {
-      const response = await fetch('http://server-face-app.vercel.app/upload', {
+      const response = await fetch('https://server-face-app.vercel.app/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,30 +33,24 @@ const Camera = () => {
       console.error('Error:', error);
     }
   };
+  
 
   return (
     <div className="relative">
-      <div class="flex justify-center h-screen">
+      <div class="flex justify-center">
         <div class="w-60 h-80 overflow-hidden rounded-lg border-4 border-blue-500">
         <Webcam
           audio={false}
           ref={webcamRef}
-          screenshotFormat="image/jpeg"
+          screenshotFormat="image/png"
           videoConstraints={videoConstraints}
           class="w-full h-full object-cover"
         />
         </div>
       </div>
-      <button onClick={capture}>Capture photo</button>
-      {imageSrc && (
-        <div>
-          <h3>Captured Image:</h3>
-          <img src={imageSrc} alt="Captured" />
-        </div>
-      )}
+      <button class="bg-white" onClick={capture}>Capture photo</button>
       {responseImg && (
-        <div>
-          <h3>Processed Image:</h3>
+        <div class="flex justify-center">
           <img src={responseImg} alt="Processed" />
         </div>
       )}
