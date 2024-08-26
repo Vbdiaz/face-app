@@ -20,7 +20,7 @@ const Camera = () => {
 
   const sendImage = async (imageSrc) => {
     try {
-      const response = await fetch('http://localhost:5000/upload', {
+      const response = await fetch('http://3.145.203.96/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Camera = () => {
   return (
     <div className="relative">
       <div className="flex justify-center">
-        <div className="w-96 h-64 overflow-hidden rounded-lg border-4 border-blue-500">
+        <div className="w-96 h-50 overflow-hidden rounded-lg border-4 border-blue-500">
           <Webcam
             audio={false}
             ref={webcamRef}
@@ -55,7 +55,7 @@ const Camera = () => {
           <img
             src={responseImg}
             alt="Processed"
-            className="w-96 h-64 object-contain border-4 border-blue-500 rounded-lg" // Adjusted for better fit
+            className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg" // Adjusted for better fit
           />
         </div>
       )}
