@@ -20,7 +20,7 @@ const Camera = () => {
 
   const sendImage = async (imageSrc) => {
     try {
-      const response = await fetch('http://3.145.203.96/upload', {
+      const response = await fetch('/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
