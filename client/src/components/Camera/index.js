@@ -53,34 +53,34 @@ const Camera = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-  {!isOverlayOpen && (
-    <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
-      <div className="w-full max-w-lg max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center">
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          videoConstraints={videoConstraints}
-          className="w-auto object-contain rounded-lg border-4 border-blue-500"
+      {!isOverlayOpen && (
+        <div className="relative w-full flex flex-col items-center justify-center p-4">
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center">
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/png"
+              videoConstraints={videoConstraints}
+              className="w-full h-full object-contain rounded-lg border-4 border-blue-500"
+            />
+          </div>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+            onClick={capture}
+          >
+            Capture photo
+          </button>
+        </div>
+      )}
+      {isOverlayOpen && (
+        <Overlay
+          imageSrc={imageSrc}
+          responseImg={responseImg}
+          onClose={handleCloseOverlay}
+          isProcessing={isProcessing}
         />
-      </div>
-      <button
-        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
-        onClick={capture}
-      >
-        Capture photo
-      </button>
+      )}
     </div>
-  )}
-  {isOverlayOpen && (
-    <Overlay
-      imageSrc={imageSrc}
-      responseImg={responseImg}
-      onClose={handleCloseOverlay}
-      isProcessing={isProcessing}
-    />
-  )}
-</div>
 
   );
 };

@@ -8,10 +8,10 @@ function App() {
     <div className="app-container">
       <ParticlesComponent id="particles" />
       <header className="title">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-boldmb-4">
+        <h1 className="md:text-3xl lg:text-6xl text-xl font-playfair font-boldmb-4">
           CNN Face Recognition
         </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl font-roboto">
+        <p className="sm:text-xs md:text-2xl lg:text-3xl font-roboto">
           Age, Emotion & Gender Predictor
         </p>
       </header>
