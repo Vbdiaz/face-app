@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="app-container">
       <ParticlesComponent id="particles" />
-      <header className="title">
+      <header class="title">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-boldmb-4">
           CNN Face Recognition
         </h1>

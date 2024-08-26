@@ -1,19 +1,19 @@
-/* App.css */
-
 .app-container {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center;    /* Center horizontally */
-  justify-content: center;/* Center vertically */
-  height: 100vh;          /* Full viewport height */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 50px); /* Adjust height to account for browser UI */
   text-align: center;
   position: relative;
+  overflow: hidden; /* Hide any overflow to prevent content from being pushed out */
 }
 
 .title {
   position: relative;
   color: white;
   margin-bottom: 20px; /* Space between title and webcam */
+  z-index: 10; /* Ensure title is above other content */
 }
 
 .particles canvas {
@@ -21,6 +21,11 @@
   height: 100%;
   width: 100%;
   position: absolute;
+}
+
+.webcam-container {
+  position: relative;
+  z-index: 5; /* Ensure webcam feed is below title */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
