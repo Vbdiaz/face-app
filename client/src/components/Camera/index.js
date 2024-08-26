@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Webcam from 'react-webcam';
+import Overlay from '../Overlay';  // Import the Overlay component
 
 const Camera = () => {
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [responseImg, setResponseImg] = useState(null);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const videoConstraints = {
     width: 1920,
@@ -13,19 +16,16 @@ const Camera = () => {
   };
 
   const capture = useCallback(() => {
-    console.log('Capture function triggered'); // Debugging line
     const imageSrc = webcamRef.current.getScreenshot();
     setImageSrc(imageSrc);
+    setIsOverlayOpen(true);
+    setIsProcessing(true);  // Show processing state and start the animation
     sendImage(imageSrc);
   }, [webcamRef]);
 
   const sendImage = async (imageSrc) => {
     try {
-<<<<<<< Updated upstream
       const response = await fetch('/upload', {
-=======
-      const response = await fetch('http://localhost:5000/upload', {
->>>>>>> Stashed changes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,58 +33,55 @@ const Camera = () => {
         body: JSON.stringify({ image: imageSrc }),
       });
       const data = await response.json();
-      setResponseImg(data.image);
+
+      // Delay the display of the processed image for 5 seconds
+      setTimeout(() => {
+        setResponseImg(data.image);
+        setIsProcessing(false);  // Stop showing the scanner animation
+      }, 5000);
+      
     } catch (error) {
       console.error('Error:', error);
+      setIsProcessing(false);  // Stop the scanner in case of an error
     }
   };
 
+  const handleCloseOverlay = () => {
+    setIsOverlayOpen(false);
+    setResponseImg(null);
+  };
+
   return (
-    <div className="relative">
-<<<<<<< Updated upstream
-      <div className="flex justify-center">
-        <div className="w-96 h-50 overflow-hidden rounded-lg border-4 border-blue-500">
-=======
-      <div className="flex justify-center mb-4">
-        <div className="w-96 h-72 overflow-hidden rounded-lg border-4 border-blue-500">
->>>>>>> Stashed changes
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/png"
-            videoConstraints={videoConstraints}
-<<<<<<< Updated upstream
-            className="w-full h-full object-contain"
-          />
-        </div>
+    <div className="flex flex-col items-center justify-center h-screen">
+  {!isOverlayOpen && (
+    <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
+      <div className="w-full max-w-lg max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center">
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/png"
+          videoConstraints={videoConstraints}
+          className="w-full h-full object-contain rounded-lg border-4 border-blue-500"
+        />
       </div>
       <button
         className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
-        onClick={() => { console.log('Button clicked'); capture(); }}
+        onClick={capture}
       >
-=======
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-      <button className="bg-white border px-4 py-2 rounded" onClick={capture}>
->>>>>>> Stashed changes
         Capture photo
       </button>
-      {responseImg && (
-        <div className="flex justify-center mt-4">
-          <img
-            src={responseImg}
-            alt="Processed"
-<<<<<<< Updated upstream
-            className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg"
-=======
-            className="w-96 h-auto border-4 border-blue-500 rounded-lg"
->>>>>>> Stashed changes
-          />
-        </div>
-      )}
     </div>
+  )}
+  {isOverlayOpen && (
+    <Overlay
+      imageSrc={imageSrc}
+      responseImg={responseImg}
+      onClose={handleCloseOverlay}
+      isProcessing={isProcessing}
+    />
+  )}
+</div>
+
   );
 };
 

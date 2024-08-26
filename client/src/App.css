@@ -1,13 +1,19 @@
+/* App.css */
+
 .app-container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;    /* Center horizontally */
+  justify-content: center;/* Center vertically */
+  height: 100vh;          /* Full viewport height */
   text-align: center;
-  position: relative; /* Ensure that children are positioned relative to this container */
+  position: relative;
 }
 
 .title {
-  position: relative; /* Ensures that it’s above other elements */
- /* Higher value to ensure it appears above particles */
-  color: white; /* Or any color that contrasts with your background */
-  margin-top: 20px; /* Adjust as needed */
+  position: relative;
+  color: white;
+  margin-bottom: 20px; /* Space between title and webcam */
 }
 
 .particles canvas {
