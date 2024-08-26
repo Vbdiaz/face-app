@@ -6,6 +6,7 @@ const Camera = () => {
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [responseImg, setResponseImg] = useState(null);
+  const [faceData, setFaceData] = useState(null);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -37,6 +38,7 @@ const Camera = () => {
       // Delay the display of the processed image for 5 seconds
       setTimeout(() => {
         setResponseImg(data.image);
+        setFaceData(data.data);
         setIsProcessing(false);  // Stop showing the scanner animation
       }, 5000);
       
@@ -49,6 +51,7 @@ const Camera = () => {
   const handleCloseOverlay = () => {
     setIsOverlayOpen(false);
     setResponseImg(null);
+    setFaceData(null);  // Clear faceData when the overlay is closed
   };
 
   return (
@@ -76,12 +79,12 @@ const Camera = () => {
         <Overlay
           imageSrc={imageSrc}
           responseImg={responseImg}
+          faceData={faceData}
           onClose={handleCloseOverlay}
           isProcessing={isProcessing}
         />
       )}
     </div>
-
   );
 };
 

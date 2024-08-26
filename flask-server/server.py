@@ -1,15 +1,17 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS # type: ignore
+from flask_cors import CORS
 from PIL import Image
 import io
 import base64
-from keras.models import load_model # type: ignore
-from keras.losses import MeanSquaredError # type: ignore
-from tensorflow.keras.utils import img_to_array # type: ignore
+from keras.models import load_model
+from keras.losses import MeanSquaredError
+from tensorflow.keras.utils import img_to_array
 import cv2
 import numpy as np
+
 app = Flask(__name__)
 CORS(app)
+
 # Load the Haar Cascade Classifier
 face_classifier = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
 
@@ -41,8 +43,11 @@ def upload():
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+    results = []  # List to hold results for each detected face
+
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
+        face_result = {}  # Dictionary to hold results for this face
         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
         roi_gray = gray[y:y+h, x:x+w]
         roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
@@ -53,24 +58,23 @@ def upload():
         roi = np.expand_dims(roi, axis=0)
 
         preds = emotion_model.predict(roi)[0]
-        label = class_labels[preds.argmax()]
-        label_position = (x, y)
-        cv2.putText(img, label, label_position, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1)
+        emotion = class_labels[preds.argmax()]
+        face_result["emotion"] = emotion
 
         # Gender prediction
         roi_color = img[y:y+h, x:x+w]
         roi_color = cv2.resize(roi_color, (200, 200), interpolation=cv2.INTER_AREA)
         gender_predict = gender_model.predict(np.array(roi_color).reshape(-1, 200, 200, 3))
         gender_predict = (gender_predict >= 0.5).astype(int)[:, 0]
-        gender_label = gender_labels[gender_predict[0]]
-        gender_label_position = (x, y+h)
-        cv2.putText(img, gender_label, gender_label_position, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1)
+        gender = gender_labels[gender_predict[0]]
+        face_result["gender"] = gender
 
         # Age prediction
         age_predict = age_model.predict(np.array(roi_color).reshape(-1, 200, 200, 3))
         age = round(age_predict[0, 0])
-        age_label_position = (x+h, y+h)
-        cv2.putText(img, "Age=" + str(age), age_label_position, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1)
+        face_result["age"] = age
+
+        results.append(face_result)
 
     # Convert back to RGB and PIL for response
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -79,7 +83,12 @@ def upload():
     img_pil.save(buffered, format="PNG", quality=95)  # Save with high quality
     img_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-    return jsonify({"image": f"data:image/png;base64,{img_base64}"})
+    response = {
+        "image": f"data:image/png;base64,{img_base64}",
+        "data": results
+    }
+
+    return jsonify(response)
 
 if __name__ == "__main__":
     app.run(debug=True)
