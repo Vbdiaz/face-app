@@ -64,7 +64,7 @@ const Camera = () => {
               ref={webcamRef}
               screenshotFormat="image/png"
               videoConstraints={videoConstraints}
-              className="w-full h-full object-contain rounded-lg border-4 border-blue-500"
+              className="w-full h-full object-contain rounded-lg border-4 border-blue-500 transform scale-x-[-1]"
             />
           </div>
           <button
