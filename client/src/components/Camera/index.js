@@ -10,8 +10,8 @@ const Camera = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const videoConstraints = {
-    width: 1280,  // Adjusted width
-    height: 720,  // Adjusted height
+    width: 1920,
+    height: 1080,
     facingMode: "user",
   };
 
@@ -53,36 +53,36 @@ const Camera = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      {!isOverlayOpen && (
-        <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
-          <div className="w-full max-w-lg max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center">
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/png"
-              videoConstraints={videoConstraints}
-              className="w-auto object-contain rounded-lg border-4 border-blue-500"
-            />
-          </div>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
-            onClick={capture}
-          >
-            Capture photo
-          </button>
-        </div>
-      )}
-      {isOverlayOpen && (
-        <Overlay
-          imageSrc={imageSrc}
-          responseImg={responseImg}
-          onClose={handleCloseOverlay}
-          isProcessing={isProcessing}
+  {!isOverlayOpen && (
+    <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
+      <div className="w-full max-w-lg max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center">
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/png"
+          videoConstraints={videoConstraints}
+          className="w-auto object-contain rounded-lg border-4 border-blue-500"
         />
-      )}
+      </div>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+        onClick={capture}
+      >
+        Capture photo
+      </button>
     </div>
+  )}
+  {isOverlayOpen && (
+    <Overlay
+      imageSrc={imageSrc}
+      responseImg={responseImg}
+      onClose={handleCloseOverlay}
+      isProcessing={isProcessing}
+    />
+  )}
+</div>
+
   );
 };
 
 export default Camera;
-
