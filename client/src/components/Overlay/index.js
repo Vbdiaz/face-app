@@ -3,13 +3,13 @@ import Scanner from '../Scanner';  // Import the Scanner component
 
 const Overlay = ({ imageSrc, responseImg, onClose, isProcessing }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <div className="relative max-w-full max-h-full flex flex-col items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+      <div className="relative">
         {/* Display the captured image */}
         <img
           src={responseImg || imageSrc}
           alt="Captured"
-          className="w-full sm:w-80 md:w-96 lg:w-1/2 xl:w-1/3 h-auto object-contain border-4 border-blue-500 rounded-lg"
+          className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl max-h-[calc(100vh-80px)] overflow-hidden flex items-center justify-center object-contain border-4 border-blue-500 rounded-lg"
         />
         
         {/* Conditionally render the Scanner animation on top */}
