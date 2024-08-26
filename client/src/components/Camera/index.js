@@ -7,12 +7,13 @@ const Camera = () => {
   const [responseImg, setResponseImg] = useState(null);
 
   const videoConstraints = {
-    width: 1920, // Increase width
-    height: 1080, // Increase height
-    facingMode: "user", // Use selfie camera or front camera
+    width: 1920,
+    height: 1080,
+    facingMode: "user",
   };
 
   const capture = useCallback(() => {
+    console.log('Capture function triggered'); // Debugging line
     const imageSrc = webcamRef.current.getScreenshot();
     setImageSrc(imageSrc);
     sendImage(imageSrc);
@@ -43,11 +44,14 @@ const Camera = () => {
             ref={webcamRef}
             screenshotFormat="image/png"
             videoConstraints={videoConstraints}
-            className="w-full h-full object-contain" // Adjusted for better fit
+            className="w-full h-full object-contain"
           />
         </div>
       </div>
-      <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded" onClick={capture}>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+        onClick={() => { console.log('Button clicked'); capture(); }}
+      >
         Capture photo
       </button>
       {responseImg && (
@@ -55,7 +59,7 @@ const Camera = () => {
           <img
             src={responseImg}
             alt="Processed"
-            className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg" // Adjusted for better fit
+            className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg"
           />
         </div>
       )}
