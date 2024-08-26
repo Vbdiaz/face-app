@@ -21,7 +21,11 @@ const Camera = () => {
 
   const sendImage = async (imageSrc) => {
     try {
+<<<<<<< Updated upstream
       const response = await fetch('/upload', {
+=======
+      const response = await fetch('http://localhost:5000/upload', {
+>>>>>>> Stashed changes
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,13 +41,19 @@ const Camera = () => {
 
   return (
     <div className="relative">
+<<<<<<< Updated upstream
       <div className="flex justify-center">
         <div className="w-96 h-50 overflow-hidden rounded-lg border-4 border-blue-500">
+=======
+      <div className="flex justify-center mb-4">
+        <div className="w-96 h-72 overflow-hidden rounded-lg border-4 border-blue-500">
+>>>>>>> Stashed changes
           <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/png"
             videoConstraints={videoConstraints}
+<<<<<<< Updated upstream
             className="w-full h-full object-contain"
           />
         </div>
@@ -52,6 +62,13 @@ const Camera = () => {
         className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
         onClick={() => { console.log('Button clicked'); capture(); }}
       >
+=======
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <button className="bg-white border px-4 py-2 rounded" onClick={capture}>
+>>>>>>> Stashed changes
         Capture photo
       </button>
       {responseImg && (
@@ -59,7 +76,11 @@ const Camera = () => {
           <img
             src={responseImg}
             alt="Processed"
+<<<<<<< Updated upstream
             className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg"
+=======
+            className="w-96 h-auto border-4 border-blue-500 rounded-lg"
+>>>>>>> Stashed changes
           />
         </div>
       )}
