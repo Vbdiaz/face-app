@@ -12,22 +12,7 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
           className="w-full h-auto object-contain border-4 border-blue-500 rounded-lg"
         />
 
-        {/* Face data at the bottom */}
-        {faceData && faceData.length > 0 && (
-          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-2">
-            <ul>
-              {faceData.map((face, index) => (
-                <li key={index} className="mb-2">
-                  <p className="font-bold">Face {index + 1}:</p>
-                  <p>Emotion: {face.emotion}</p>
-                  <p>Gender: {face.gender}</p>
-                  <p>Age: {face.age}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        
+                
         {/* Conditionally render the Scanner animation on top */}
         {isProcessing && (
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
@@ -44,6 +29,22 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
           Close
         </button>
       </div>
+
+      {/* Face data at the bottom */}
+      {faceData && faceData.length > 0 && (
+          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-2">
+            <ul>
+              {faceData.map((face, index) => (
+                <li key={index} className="mb-2">
+                  <p className="font-bold">Face {index + 1}:</p>
+                  <p>Emotion: {face.emotion}</p>
+                  <p>Gender: {face.gender}</p>
+                  <p>Age: {face.age}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
     </div>
   );
 };
