@@ -7,12 +7,13 @@ const Camera = () => {
   const [responseImg, setResponseImg] = useState(null);
 
   const videoConstraints = {
-    width: 1920, // Increase width
-    height: 1080, // Increase height
-    facingMode: "user", // Use selfie camera or front camera
+    width: 1920,
+    height: 1080,
+    facingMode: "user",
   };
 
   const capture = useCallback(() => {
+    console.log('Capture function triggered'); // Debugging line
     const imageSrc = webcamRef.current.getScreenshot();
     setImageSrc(imageSrc);
     sendImage(imageSrc);
@@ -20,7 +21,7 @@ const Camera = () => {
 
   const sendImage = async (imageSrc) => {
     try {
-      const response = await fetch('https://server-face-app.vercel.app/upload', {
+      const response = await fetch('/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,25 +34,33 @@ const Camera = () => {
       console.error('Error:', error);
     }
   };
-  
 
   return (
     <div className="relative">
-      <div class="flex justify-center">
-        <div class="w-60 h-80 overflow-hidden rounded-lg border-4 border-blue-500">
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          videoConstraints={videoConstraints}
-          class="w-full h-full object-cover"
-        />
+      <div className="flex justify-center">
+        <div className="w-96 h-50 overflow-hidden rounded-lg border-4 border-blue-500">
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            videoConstraints={videoConstraints}
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
-      <button class="bg-white" onClick={capture}>Capture photo</button>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+        onClick={() => { console.log('Button clicked'); capture(); }}
+      >
+        Capture photo
+      </button>
       {responseImg && (
-        <div class="flex justify-center">
-          <img src={responseImg} alt="Processed" />
+        <div className="flex justify-center mt-4">
+          <img
+            src={responseImg}
+            alt="Processed"
+            className="w-96 h-50 object-contain border-4 border-blue-500 rounded-lg"
+          />
         </div>
       )}
     </div>
