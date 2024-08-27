@@ -42,7 +42,7 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
           className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded"
           onClick={onClose}
         >
-          X Close
+          Close
         </button>
       </div>
     </div>
