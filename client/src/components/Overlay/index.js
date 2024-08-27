@@ -9,7 +9,7 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
         <img
           src={responseImg || imageSrc}
           alt="Captured"
-          className="w-full h-auto object-contain border-4 border-blue-500 rounded-lg"
+          className="w-full h-auto object-contain border-4 border-blue-500 rounded-lg transform scale-x-[-1]"
         />
 
                 
