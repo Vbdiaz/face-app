@@ -9,7 +9,7 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
         <img
           src={responseImg || imageSrc}
           alt="Captured"
-          className="w-full h-auto object-contain border-4 border-blue-500 rounded-lg"
+          className="w-full h-auto object-contain border-4 border-blue-500 rounded-lg transform scale-x-[-1]"
         />
 
                 
@@ -21,18 +21,10 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
             </div>
           </div>
         )}
-        
-        <button
-          className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded"
-          onClick={onClose}
-        >
-          Close
-        </button>
-      </div>
 
-      {/* Face data at the bottom */}
-      {faceData && faceData.length > 0 && (
-          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-2">
+        {/* Face data below the image */}
+        {faceData && faceData.length > 0 && (
+          <div className="w-full bg-black bg-opacity-60 text-white p-4">
             <ul>
               {faceData.map((face, index) => (
                 <li key={index} className="mb-2">
@@ -45,6 +37,14 @@ const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => 
             </ul>
           </div>
         )}
+        
+        <button
+          className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded"
+          onClick={onClose}
+        >
+          Close
+        </button>
+      </div>
     </div>
   );
 };
