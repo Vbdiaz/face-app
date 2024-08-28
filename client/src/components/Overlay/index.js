@@ -3,7 +3,7 @@ import Scanner from '../Scanner';  // Import the Scanner component
 
 const Overlay = ({ imageSrc, responseImg, faceData, onClose, isProcessing }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
       <div className="relative max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl max-h-[calc(100vh-80px)] overflow-hidden">
         {/* Display the captured image */}
         <img

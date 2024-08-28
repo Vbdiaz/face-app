@@ -55,6 +55,9 @@ const Camera = () => {
   };
 
   return (
+    <div>
+      Hello
+    
     <div className="flex flex-col items-center justify-center h-screen">
       {!isOverlayOpen && (
         <div className="relative w-full flex flex-col items-center justify-center p-4">
@@ -84,6 +87,7 @@ const Camera = () => {
           isProcessing={isProcessing}
         />
       )}
+    </div>
     </div>
   );
 };

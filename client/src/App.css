@@ -1,35 +1,54 @@
-/* App.css */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
 
 .app-container {
-  display: flex;
   flex-direction: column; /* Stack children vertically */
   align-items: center;    /* Center horizontally */
   justify-content: center;/* Center vertically */
-  height: 100vh;          /* Full viewport height */
   text-align: center;
   position: relative;
 }
 
-.title {
-  padding-top: 10px;
-  position: relative;
-  color: white;
-  margin-bottom: 20px; /* Space between title and webcam */
-}
-
-.particles canvas {
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
-
-.font-roboto {
-  font-family: 'Roboto', sans-serif;
-}
-
-.font-playfair {
+/* Apply the Playfair Display font to the header */
+header {
   font-family: 'Playfair Display', serif;
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Styling for the header title */
+header h1 {
+  font-family: 'Playfair Display', serif; /* Top font */
+  font-size: 3vw; /* Large font size that scales with viewport width */
+  margin: 0; /* Remove default margin */
+  line-height: 1.2;
+}
+
+/* Styling for the header subtitle or paragraph */
+header p {
+  font-family: 'Roboto', serif; /* Bottom serif font */
+  font-size: 2vw; /* Slightly smaller than the h1 */
+  margin: 10px 0 0 0; /* Top margin for spacing, no bottom margin */
+}
+
+/* Adjust the font sizes on smaller screens */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 5vw; /* Increase the relative size on smaller screens */
+  }
+
+  header p {
+    font-size: 4vw; /* Increase the relative size on smaller screens */
+  }
+}
+
+/* Adjust the margin-top to reduce space between header and webcam */
+.webcam-container {
+  margin-top: -120px; /* Adjust this value as needed */
 }
