@@ -14,7 +14,7 @@ const Info = () => {
             <h2 className="text-2xl font-bold text-gray-900">What are Haar Cascade Classifiers?</h2>
             <img src="/img/haar.png" className="block mx-auto"></img>
             <p className="mt-2 text-gray-700">Haar cascade classifiers are a widely used object detection method introduced by Paul Viola and Michael Jones in 2001. This machine learning model is based on a large dataset of images, both with and without faces. The algorithm employs Haar features, which are patterns of white and black rectangles used to detect facial features. These features are applied to all training images, and the most effective features are selected for the final model. The classifier operates in a layered approach, where the image is processed through multiple stages with different features. If the image successfully passes through all stages, it indicates that a face has been identified.</p>
-            <p className="mx-auto"> OpenCV. (n.d.). <em>Cascade classifier.</em> <a href="https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html</a></p>
+            <p className="mx-auto"> OpenCV. (n.d.). <em>Cascade classifier.</em> <a href="https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html" class="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">https://docs.opencv.org/3.4/db/d28/tutorial...</a></p>
             </div>
 
             <div className="mb-6">

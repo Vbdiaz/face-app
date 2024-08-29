@@ -13,12 +13,12 @@ app = Flask(__name__)
 CORS(app)
 
 # Load the Haar Cascade Classifier
-face_classifier = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
+face_classifier = cv2.CascadeClassifier('./Models/haarcascade_frontalface_default.xml')
 
 # Load the models with custom objects specified
-emotion_model = load_model('../emotion_detection_model_100epochs.h5')
-age_model = load_model('../age_model_50epochs.h5', custom_objects={'mse': MeanSquaredError()})
-gender_model = load_model('../gender_model_50epochs.h5')
+emotion_model = load_model('./Models/emotion_detection_model_100epochs.h5')
+age_model = load_model('./Models/age_model_50epochs.h5', custom_objects={'mse': MeanSquaredError()})
+gender_model = load_model('./Models/gender_model_50epochs.h5')
 
 # Define labels
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
