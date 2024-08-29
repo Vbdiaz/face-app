@@ -22,7 +22,7 @@ This repository contains two main parts: a Node.js React client and a Python Fla
     cd client
     ```
 
-2. **Install the required dependencies**:
+2. **Install the required dependencies using node 20.16.0+**:
     ```bash
     npm install
     ```
